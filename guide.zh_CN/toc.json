@@ -56,7 +56,13 @@
 				},
 				{
 					"name": "HTTP请求与响应过滤器",
-					"doc":  "filters"
+					"doc":  "filters",
+					"contents": [
+						{
+							"name": "Web重定向",
+							"doc":  "webRedirects"
+						}
+					]
 				},
 				{
 					"name": "Session 会话管理",
@@ -71,6 +77,10 @@
 							"doc":  "cors"
 						}
 					]
+				},
+				{
+					"name": "用户身份验证",
+					"doc":  "authentication"
 				},
 				{
 					"name": "SPNEGO 安全功能",
@@ -99,6 +109,10 @@
 			]
 		},
 		{
+			"name":"CRUD",
+			"doc":"crud"
+		},
+		{
 			"name": "WebSockets",
 			"doc":  "webSockets"
 		},
@@ -111,12 +125,60 @@
 					"doc":  "bytes"
 				},
 				{
-					"name": "文件操作",
-					"doc":  "file"
+					"name": "Crypto 加密",
+					"doc":  "crypto"
+				},
+				{
+					"name": "CURL联网传输",
+					"doc":  "cURL"
 				},
 				{
 					"name": "目录与路径",
 					"doc":  "dir"
+				},
+				{
+					"name": "环境变量",
+					"doc":  "env"
+				},
+				{
+					"name": "文件操作",
+					"doc":  "file"
+				},
+				{
+					"name": "谷歌网站分析协议",
+					"doc":  "GoogleAnalytics"
+				},
+				{
+					"name": "Log日志",
+					"doc":  "log"
+				},
+				{
+					"name": "消息推送",
+					"doc":  "iOSNotifications"
+				},
+				{
+					"name": "Log日志文件",
+					"doc":  "logFiles"
+				},
+				{
+					"name": "远程日志服务器",
+					"doc":  "logRemote"
+				},
+				{
+					"name": "OAuth2 身份授权",
+					"doc":  "OAuth2"
+				},
+				{
+					"name": "定时器",
+					"doc":  "repeater"
+				},
+				{
+					"name": "SMTP简单邮件协议",
+					"doc":  "SMTP"
+				},
+				{
+					"name": "SysProcess系统进程",
+					"doc":  "sysProcess"
 				},
 				{
 					"name": "线程",
@@ -127,22 +189,6 @@
 					"doc":  "UUID"
 				},
 				{
-					"name": "SysProcess系统进程",
-					"doc":  "sysProcess"
-				},
-				{
-					"name": "Log日志",
-					"doc":  "log"
-				},
-				{
-					"name": "Log日志文件",
-					"doc":  "logFiles"
-				},
-				{
-					"name": "CURL联网传输",
-					"doc":  "cURL"
-				},
-				{
 					"name": "XML",
 					"doc":  "xml"
 				},
@@ -151,16 +197,8 @@
 					"doc":  "ini"
 				},
 				{
-					"name": "Crypto 加密",
-					"doc":  "crypto"
-				},
-				{
 					"name": "Zip压缩",
 					"doc":  "zip"
-				},
-				{
-					"name": "SMTP简单邮件协议",
-					"doc":  "SMTP"
 				}
 			]
 		},
@@ -221,44 +259,6 @@
 				{
 					"name": "LDAP",
 					"doc":  "LDAP"
-				},
-				{
-					"name": "Kafka",
-					"doc":  "Kafka"
-				},
-				{
-					"name": "Mosquitto",
-					"doc":  "mosquitto"
-				},
-				{
-					"name": "ZooKeeper",
-					"doc":  "ZooKeeper"
-				},
-				{
-					"name": "Hadoop",
-					"doc":  "Hadoop",
-					"contents":[
-						{
-							"name": "HDFS",
-							"doc":  "HadoopHadoopWebHDFS"
-						},
-						{
-							"name": "MapReduce Master",
-							"doc":  "Hadoop"
-						},
-						{
-							"name": "MapReduce History",
-							"doc":  "Hadoop"
-						},
-						{
-							"name": "YARN Node Manager",
-							"doc":  "Hadoop"
-						},
-						{
-							"name": "YARN Resource Manager",
-							"doc":  "Hadoop"
-						}
-					]
 				}
 			]
 		},
@@ -273,6 +273,60 @@
 				{
 					"name": "New Relic",
 					"doc": "NEWRELIC"
+				}
+			]
+		},
+		{
+			"name": "Message Queue & Cluster",
+			"doc": "cluster",
+			"contents":[
+				{
+					"name": "Kafka",
+					"doc":  "Kafka"
+				},
+				{
+					"name": "Mosquitto",
+					"doc":  "mosquitto"
+				},
+				{
+					"name": "ZooKeeper",
+					"doc":  "ZooKeeper"
+				}
+			]
+		},
+		{
+			"name": "Big Data & Machine Learning",
+			"doc": "ai",
+			"contents":[
+				{
+					"name": "TensorFlow",
+					"doc": "tensorflow"
+				},
+				{
+					"name": "Hadoop",
+					"doc":  "Hadoop",
+					"contents":[
+						{
+							"name": "HDFS",
+							"doc":  "HadoopWebHDFS"
+						},
+						{
+							"name": "MapReduce Master",
+							"doc":  "HadoopMapReduceMaster"
+						},
+						{
+							"name": "MapReduce History",
+							"doc":  "HadoopMapReduceHistory"
+						},
+						{
+							"name": "YARN Node Manager",
+							"doc":  "HadoopYARNNodeManager"
+						},
+						{
+							"name": "YARN Resource Manager",
+							"doc":  "HadoopYARNResourceManager"
+						}
+					]
 				}
 			]
 		},
@@ -305,6 +359,10 @@
 					"doc":  "StORM-Update"
 				},
 				{
+					"name": "全局全周期事件",
+					"doc":  "StORMLifecycleEvents"
+				},
+				{
 					"name": "PostgresStORM",
 					"doc":  "StORM-PostgreSQL"
 				},
@@ -319,12 +377,20 @@
 				{
 					"name": "CouchDBStORM",
 					"doc":  "StORM-CouchDB"
+				},
+				{
+					"name": "MongoDBStoRM",
+					"doc":  "StORM-MongoDB"
 				}
 			]
 		},
 		{
 			"name": "Turnstile 认证",
 			"doc":  "Turnstile"
+		},
+		{
+			"name": "语言扩展",
+			"doc":  "python"
 		}
 	]
 }

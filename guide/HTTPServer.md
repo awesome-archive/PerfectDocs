@@ -10,7 +10,7 @@ When starting servers you can choose to wait until the servers have terminated (
 
 ## HTTPServer Configuration Data
 
-One or more Perfect HTTP servers can be configured and launched using structured configuration data. This includes setting elements such as the listen port and bind address but also permits pointing handlers to specific fuctions by name. This feature is required if loading server configuration data from a JSON file. In order to enable this functionality on Linux, you must build your SPM executable with an additional flag:
+One or more Perfect HTTP servers can be configured and launched using structured configuration data. This includes setting elements such as the listen port and bind address but also permits pointing handlers to specific functions by name. This feature is required if loading server configuration data from a JSON file. In order to enable this functionality on Linux, you must build your SPM executable with an additional flag:
 
 ```
 swift build -Xlinker --export-dynamic
@@ -66,13 +66,13 @@ A simple example single server configuration dictionary might look as follows. N
 				[
 					"method":"get",
 					"uri":"/**",
-					"handler":"PerfectHTTPServer.HTTPHandler.staticFiles",
+					"handler":PerfectHTTPServer.HTTPHandler.staticFiles,
 					"documentRoot":"/path/to/webroot"
 				],
 				[
 					"methods":["get", "post"],
 					"uri":"/api/**",
-					"handler":"PerfectHTTPServer.HTTPHandler.redirect",
+					"handler":PerfectHTTPServer.HTTPHandler.redirect,
 					"base":"http://other.server.ca"
 				]
 			]
@@ -105,13 +105,15 @@ Corresponding HTTPServer property: `HTTPServer.serverAddress`.
 
 ### routes:
 
-This **optional** element should have a value that is an array of [String:Any] dictionaries. Each element of the array indicates a URI route which maps an incoming HTTP request to a handler. See [Routing](routing.md) for specifics on Perfect's URI routing system.
+This **optional** element should have a value that is an array of [String:Any] dictionaries. Each element of the array indicates a URI route or group of URI toues which map an incoming HTTP request to a handler. See [Routing](routing.md) for specifics on Perfect's URI routing system.
 
-Each route consists of zero or more HTTP methods, a URI and the name of a function which returns a `RequestHandler`.
+Each [String:Any] dictionary in the "routes" array must be either a simple route with a handler or a group of routes.
 
-The key names are: "method" or "methods", "uri" and "handler". The value for each of these should be a string, except in the case of "methods" which should be an array of strings. If no method values are provided then any HTTP method may trigger the handler.
+If the dictionary has a "uri" and a "handler" key, then it is assumed to be a simple route. A group of yours must have at least a "children" key.
 
-Any additional keys/values are provided when the named function is called. These keys can be used to configure the handler's behaviour. For example, the `staticFiles` handler requires a "documentRoot" key to configure the directory containing local static files.
+A simple route consists of zero or more HTTP methods, a URI and the name of a `RequestHandler` function or a function which returns a `RequestHandler`. The key names are: "method" or "methods", "uri", and "handler". The value for the "methods" key should be an array of strings. If no method values are provided then any HTTP method may trigger the handler.
+
+A group of handlers consists of an optional "baseURI", an optional "handler", and a required array of "children" whose value must be [[String:Any]]. Each of the children in this array can in turn express either simple route handlers or further groups of routes. The optional "handler" function will be executed before the final request handler. Multiple handlers can be chained in this manner, some running earlier to set up certain state or to screen the incomming requests. Handlers used in this manner should call `response.next()` to indicate that the handler has finished executing and the next one can be called. If there are no further handlers then the request will be completed. If an intermediate handler determines that the request should go no futher, it can call `response.completed()` and no futher handlers will be executed.
 
 Perfect comes with request handlers that take care of various common tasks such as redirecting clients or serving static, on-disk files. The following example defines a server which listens on port 8080 and has two handlers, one of which serves static files while the other redirects clients to a new URL.
 
@@ -125,14 +127,19 @@ Perfect comes with request handlers that take care of various common tasks such 
 				[
 					"method":"get",
 					"uri":"/**",
-					"handler":"PerfectHTTPServer.HTTPHandler.staticFiles",
+					"handler":PerfectHTTPServer.HTTPHandler.staticFiles,
 					"documentRoot":"/path/to/webroot"
 				],
 				[
-					"methods":["get", "post"],
-					"uri":"/api/**",
-					"handler":"PerfectHTTPServer.HTTPHandler.redirect",
-					"base":"http://other.server.ca"
+					"baseURI":"/api",
+					"children":[
+						[
+							"methods":["get", "post"],
+							"uri":"/**",
+							"handler":PerfectHTTPServer.HTTPHandler.redirect,
+							"base":"http://other.server.ca"
+						]
+					]
 				]
 			]
 		]
@@ -147,6 +154,8 @@ Corresponding HTTPServer property: `HTTPServer.addRoutes`.
 While the built-in Perfect request handlers can be handy, most developers will want to add custom behaviour to their servers. The "handler" key values can point to your own functions which will each return the `RequestHandler` to be called when the route uri matches an incoming request.
 
 It's important to note that the function names which you would enter into the configuration data are **static** functions which *return* the `RequestHandler` that will be subsequently used. These functions accept the current configuration data [String:Any] for the particular route in order to extract any available configuration data such as the `staticFiles` "documentRoot" described above.
+
+Alternatively, if you do not need any of the available configuration data (for example, your handler requires no configuration) you can simply indicate the `RequestHandler` itself.
 
 It's also vital that the name you provide be fully qualified. That is, it should include your Swift module name, the name of any interstitial nesting constructs such as struct or enum, and then the function name itself. These should all be separated by "." (periods). For example, you can see the static file handler is given as "PerfectHTTPServer.HTTPHandler.staticFiles". It resides in the module "PerfectHTTPServer", in an extension of the struct "HTTPHandler" and is named "staticFiles".
 
@@ -247,6 +256,48 @@ public func custom404(data: [String:Any]) throws -> HTTPResponseFilter {
 ```
 
 Corresponding HTTPServer properties: `HTTPServer.setRequestFilters`, `HTTPServer.setResponseFilters`.
+
+### Sharing Information Among Request, Filter and Response
+
+Sometimes it is necessary to share certain information among HTTPRequest, HTTPFiler and HTTPResponse. For example, an authentication filter may decode a user id from cookies or JWT tokens and make the use profile available to the request session scope as a typical security design. 
+
+Although HTTP is stateless and blocking the transparency between filters and requests, Perfect HTTPServer still provides an indirect way to share these valuable information in each request and make the whole design more efficient:
+
+``` swift
+/// an authentication filter, which intercept all incoming request
+/// and assuming all successful login should present a token.
+func filter(request: HTTPRequest, response: HTTPResponse,
+                     callback: (HTTPRequestFilterResult) -> ()) {
+  guard let token = request.param("token"), 
+  let userId = token.decode(),
+  let profile = database.load(userId) as? Profile else {
+  	// the request doesn't hold a valid token
+  	// access denied
+  	response.status = .forbidden
+  	response.completed
+  	callback(.halt(request, response))
+  }
+  
+  	// user information retrieved successfully, 
+  	// now save this info into the memory
+  response.request.scratchPad["currentUserProfile"] = profile
+  	
+  // then invoke the following request
+  callback(.continue(request, response))
+}
+
+routes.add(Route(method: .get, uri: "/api/aboutUser", handler: {
+      request, response in
+      guard let profile 
+      	= response.request.scratchPad["currentUserProfile"] as? Profile
+		else {
+      		//something wrong
+      	}
+      	/// now you can directly use the profile
+    }))
+```
+
+In the above example, the priority filter intercepts the request first and translates the request into a user profile, then passes the user profile to the following requests, which implements a centralized authentication middleware.
 
 ### tlsConfig:
 

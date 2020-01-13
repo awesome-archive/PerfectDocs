@@ -2,14 +2,14 @@
 
 This project provides an express parser for [INI](https://en.wikipedia.org/wiki/INI_file) files.
 
-This package builds with Swift Package Manager of Swift 3.1 Tool Chain and is part of the [Perfect](https://github.com/PerfectlySoft/Perfect) project but can be used as an independent module.
+This package builds with Swift Package Manager of Swift 4 Tool Chain and is part of the [Perfect](https://github.com/PerfectlySoft/Perfect) project but can be used as an independent module.
 
 ## Quick Start
 
 Configure Package.swift:
 
 ``` swift
-.Package(url: "https://github.com/PerfectlySoft/Perfect-INIParser.git", majorVersion: 1)
+.Package(url: "https://github.com/PerfectlySoft/Perfect-INIParser.git", majorVersion: 3)
 ```
 
 Import library into your code:

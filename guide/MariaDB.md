@@ -2,7 +2,7 @@
 
 The MariaDB connector provides a wrapper around MariaDB, allowing interaction between your Perfect Applications and MariaDB databases. 
 
-**Note:** Because of the history of MySQL & MariaDB, MariaDB keeps the same names as MySQL API functions; however, it is not possible to compile MariaDB in a MySQL configuration "as-is" context. This is why Perfect 2.0 includes both MySQL & MariaDB connectors.
+**Note:** Because of the history of MySQL & MariaDB, MariaDB keeps the same names as MySQL API functions; however, it is not possible to compile MariaDB in a MySQL configuration "as-is" context. This is why Perfect 3.0 includes both MySQL & MariaDB connectors.
 
 ### System Requirements
 
@@ -82,7 +82,7 @@ Libs_r: -L${libdir} -lmariadb -ldl -lm -lpthread
 Add the "Perfect-MariaDB" project as a dependency in your Package.swift file:
 
 ``` swift
-.Package(url:"https://github.com/PerfectlySoft/Perfect-MariaDB.git", majorVersion: 2, minor: 0)
+.Package(url:"https://github.com/PerfectlySoft/Perfect-MariaDB.git", majorVersion: 3)
 ```
 
 ### Import
@@ -181,7 +181,16 @@ Choosing the database is great, but it is much more helpful to run queries, such
 		    }
 		    
 		   //Run Query to Add Tables
-		   
+		  	let sql = """
+		  	CREATE TABLE IF NOT EXISTS ticket (
+    		id VARCHAR(64) PRIMARY KEY NOT NULL,
+			expiration INTEGER)
+    		"""
+			guard mysql.query(statement: sql) else {
+		        // verify the table was created successfully
+		        print(mysql.errorMessage())
+		        return
+		   }		   
 		   
 		}
 ```
@@ -257,6 +266,17 @@ public func close()
 ```
 
 Closes a connection to MariaDB. Most commonly used as a defer after guarding a connection, making sure that your session will close no matter what the outcome.
+
+### ping
+
+MariaDB connection will go away when idle timeout. The `ping()` function
+can confirm the connectivity and also reconnect if need.
+
+``` swift
+guard mysql.ping() else {
+	// connection lost
+}
+```
 
 ### clientInfo
 

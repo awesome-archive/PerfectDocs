@@ -79,6 +79,10 @@
 					]
 				},
 				{
+					"name": "Local Authentication modules",
+					"doc":  "authentication"
+				},
+				{
 					"name": "SPNEGO Security",
 					"doc":  "SPNEGO"
 				},
@@ -105,6 +109,10 @@
 			]
 		},
 		{
+			"name":"CRUD",
+			"doc":"crud"
+		},
+		{
 			"name": "WebSockets",
 			"doc":  "webSockets"
 		},
@@ -117,12 +125,20 @@
 					"doc":  "bytes"
 				},
 				{
+					"name": "Crypto",
+					"doc":  "crypto"
+				},
+				{
 					"name": "CURL",
 					"doc":  "cURL"
 				},
 				{
 					"name": "Dir",
 					"doc":  "dir"
+				},
+				{
+					"name": "Environmental Variables",
+					"doc":  "env"
 				},
 				{
 					"name": "File",
@@ -141,8 +157,20 @@
 					"doc":  "logFiles"
 				},
 				{
+					"name": "Push Notifications",
+					"doc":  "iOSNotifications"
+				},
+				{
+					"name": "Remote Logging",
+					"doc":  "logRemote"
+				},
+				{
 					"name": "OAuth2 and Providers",
 					"doc":  "OAuth2"
+				},
+				{
+					"name": "Repeater/Cron",
+					"doc":  "repeater"
 				},
 				{
 					"name": "Remote Logging",
@@ -171,10 +199,6 @@
 				{
 					"name": "INI",
 					"doc":  "ini"
-				},
-				{
-					"name": "Crypto",
-					"doc":  "crypto"
 				},
 				{
 					"name": "Zip",
@@ -235,7 +259,27 @@
 				{
 					"name": "LDAP",
 					"doc":  "LDAP"
+				}
+			]
+		},
+		{
+			"name": "Performance Profiling & Remote Monitoring",
+			"doc": "profiling",
+			"contents":[
+				{
+					"name": "System Information",
+					"doc": "SYSINFO"
 				},
+				{
+					"name": "New Relic",
+					"doc": "NEWRELIC"
+				}
+			]
+		},
+		{
+			"name": "Message Queue & Cluster",
+			"doc": "cluster",
+			"contents":[
 				{
 					"name": "Kafka",
 					"doc":  "Kafka"
@@ -247,6 +291,16 @@
 				{
 					"name": "ZooKeeper",
 					"doc":  "ZooKeeper"
+				}
+			]
+		},
+		{
+			"name": "Big Data & Machine Learning",
+			"doc": "ai",
+			"contents":[
+				{
+					"name": "TensorFlow",
+					"doc": "tensorflow"
 				},
 				{
 					"name": "Hadoop",
@@ -273,20 +327,6 @@
 							"doc":  "HadoopYARNResourceManager"
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "Performance Profiling & Remote Monitoring",
-			"doc": "profiling",
-			"contents":[
-				{
-					"name": "System Information",
-					"doc": "SYSINFO"
-				},
-				{
-					"name": "New Relic",
-					"doc": "NEWRELIC"
 				}
 			]
 		},
@@ -319,6 +359,10 @@
 					"doc":  "StORM-Update"
 				},
 				{
+					"name": "StORM Lifecycle Events",
+					"doc":  "StORMLifecycleEvents"
+				},
+				{
 					"name": "PostgresStORM",
 					"doc":  "StORM-PostgreSQL"
 				},
@@ -333,12 +377,20 @@
 				{
 					"name": "CouchDBStORM",
 					"doc":  "StORM-CouchDB"
+				},
+				{
+					"name": "MongoDBStoRM",
+					"doc":  "StORM-MongoDB"
 				}
 			]
 		},
 		{
 			"name": "Turnstile Authentication",
 			"doc":  "Turnstile"
+		},
+		{
+			"name": "Language Extension",
+			"doc":  "python"
 		}
 	]
 }

@@ -23,7 +23,7 @@
 
 <p align="center">
     <a href="https://developer.apple.com/swift/" target="_blank">
-        <img src="https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat" alt="Swift 3.0">
+        <img src="https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat" alt="Swift 4.1">
     </a>
     <a href="https://developer.apple.com/swift/" target="_blank">
         <img src="https://img.shields.io/badge/Platforms-OS%20X%20%7C%20Linux%20-lightgray.svg?style=flat" alt="Platforms OS X | Linux">
@@ -71,22 +71,29 @@
 		* [文件上传](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/fileUploads.md)
 	* [HTTPResponse响应对象](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/HTTPResponse.md)
 	* [HTTP请求与响应过滤器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/filters.md)
+		* [Web 重定向过滤器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/webRedirects.md)
 	* [Session 会话管理](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/sessions.md)
 		* [CSRF 安全功能](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/csrf.md)
 		* [CORS 安全功能](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/cors.md)
+	* [用户身份认证](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/authentication.md)	
 	* [GSS-SPNEGO 安全插件](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/SPNEGO.md)
 	* [JSON数据转换](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/JSON.md)
 	* [静态文件](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/staticFileContent.md)
 	* [Mustache页面模板](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/mustache.md)
 	* [Markdown](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Markdown.md)
 	* [HTTP请求日志记录器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/HTTPRequestLogging.md)
+	* [日志文件格式](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/logFiles.md)
+	* [远程日志服务器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/logRemote.md)
+* [CRUD](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/crud.md)
 * [WebSockets](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/webSockets.md)
 * [基本工具](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/utilities.md)
 	* [字节流转换](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/bytes.md)
 	* [文件操作](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/file.md)
 	* [目录与路径](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/dir.md)
+	* [环境变量](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/env.md)
 	* [线程](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/thread.md)
 	* [网络](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/net.md) @kjessup
+	* [OAuth2 身份授权](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/OAuth2.md)
 	* [UUID唯一标识符](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/UUID.md)
 	* [SysProcess系统进程](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/sysProcess.md)
 	* [日志](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/log.md)
@@ -97,6 +104,8 @@
 	* [Zip压缩](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/zip.md)
 	* [Crypto 加密](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/crypto.md)
 	* [SMTP 简单邮件协议](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/SMTP.md)
+	* [谷歌网站分析协议l](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/GoogleAnalytics.md)
+	* [定时器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/repeater.md)
 * [数据库连接器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/databaseConnectors.md)
 	* [SQLite](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/SQLite.md)
 	* [MySQL](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/MySQL.md)
@@ -112,18 +121,9 @@
 	* [LDAP](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/LDAP.md)
 	* [Redis](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Redis.md) @kjessup
 	* [FileMaker](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/filemaker.md)
-	* [Kafka](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Kafka.md)
-	* [Mosquitto](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/mosquitto.md)
-	* [ZooKeeper (Linux Only)](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/ZooKeeper.md)
-	* [Hadoop](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Hadoop.md)
-		* [HDFS](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/HadoopWebHDFS.md)
-		* [MapReduce Master 应用程序服务器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopMapReduceMaster.md)
-		* [MapReduce 历史服务器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopMapReduceHistory.md)
-		* [YARN 节点管理器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopYARNNodeManager.md)
-		* [YARN 资源管理器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopYARNResourceManager.md)
 * [iOS 消息与通知](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/iOSNotifications.md) @kjessup
 * [发行与部署](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/deployment.md)
-	* [Ubuntu 15.10](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/deployment-Ubuntu1510.md)
+	* [Ubuntu](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/deployment-Ubuntu.md)
 	* Docker
 	* Heroku
 	* Azure
@@ -135,9 +135,25 @@
 	* [SysInfo](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/SYSINFO.md)
 	* [New Relic](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/NEWRELIC.md)
 
+* 消息队列及服务器集群
+	* [Kafka](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Kafka.md)
+	* [Mosquitto](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/mosquitto.md)
+	* [ZooKeeper (Linux Only)](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/ZooKeeper.md)
+
+* 大数据、人工智能及机器学习
+	* [TensorFlow](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/tensorflow.md)
+	* [Hadoop](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Hadoop.md)
+		* [HDFS](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/HadoopWebHDFS.md)
+		* [MapReduce Master 应用程序服务器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopMapReduceMaster.md)
+		* [MapReduce 历史服务器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopMapReduceHistory.md)
+		* [YARN 节点管理器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopYARNNodeManager.md)
+		* [YARN 资源管理器](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN//HadoopYARNResourceManager.md)
 
 * 平台安装说明
 	* [Ubuntu 16.04 系统服务安装指南](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/starting-services.md)
+
+* 语言扩展：
+	* [Python](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/python.md)
 
 ## StORM：Swift的对象关系管理（ORM）
 
@@ -150,14 +166,18 @@ StORM 并非 Perfect.org 发行的项目，但是 Perfect 的函数库将 StORM 
 	* [StORM游标](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-Cursor.md)
 	* [插入数据](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-Insert.md)
 	* [更新数据](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-Update.md)
+	* [StORM 全局全周期事件](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORMLifecycleEvents.md)
 	* [PostgresStORM 对象关系管理](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-PostgreSQL.md)
 	* [SQLiteStORM 对象关系管理](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-SQLite.md)
 	* [MySQLStORM 对象关系管理](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-MySQL.md)
 	* [Apache CouchDB 对象关系管理](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-CouchDB.md)
+	* [MongoDB 对象关系管理](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/StORM-MongoDB.md)
 
  ## Perfect Turnstile – 用户身份验证管理
 
  [Turnstile](https://github.com/stormpath/Turnstile) 是一个用于用户身份跨平台认证的开源软件框架体系 [Stormpath](https://github.com/stormpath) 。感谢 [Edward Jiang](https://github.com/edjiang) 为 Perfect 提供了 Turnstile。
+
+**⚠️注意⚠️** Turnstile 作者已经终止维护该项目，详见 [Storm API 移植常见问题](https://stormpath.com/oktaplusstormpath?utm_source=github&utm_medium=readme&utm-campaign=okta-announcement)。
 
 * [Perfect-Turnstile](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Turnstile.md)
 	* [Perfect Turnstile 与 SQLite 集成](https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/Turnstile.md)

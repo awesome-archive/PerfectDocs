@@ -4,7 +4,7 @@
 
 该软件使用SPM进行编译和测试，本软件也是[Perfect](https://github.com/PerfectlySoft/Perfect)项目的一部分。
 
-请确保您已经安装并激活了最新版本的 Swift 3.0 工具链。
+请确保您已经安装并激活了最新版本的 Swift 4.0 工具链。
 
 ## Linux 编译注意事项
 
@@ -18,7 +18,7 @@ sudo apt-get install libssl-dev
 使用 SMTP 库函数之前，请首先修改您的项目 Package.swift 文件并增加如下依存关系：
 
 ``` swift
-.Package(url: "https://github.com/PerfectlySoft/Perfect-SMTP.git", majorVersion: 1, minor: 0)
+.Package(url: "https://github.com/PerfectlySoft/Perfect-SMTP.git", majorVersion: 3)
 ```
 
 随后在源代码开始部分增加导入说明：
@@ -97,6 +97,7 @@ do {
 - attachments: [String]，邮件附件文件名构成的数组，比如 ["/本地/计算机/文件.txt", "/本地/电脑/照片.jpg" ...]
 - content: String，邮件正文，可以是普通文本，或者是HTML
 - html: String，邮件正文的别名，和content 使用相同的变量
+- text: String，将内容设置为纯文本
 - send(completion: @escaping ((Int, String, String)->Void))，邮件发送函数，参数为回调函数。
 回调函数包括以下三个参数，详细含义请参考 Perfect-CURL `performFully()`函数：
   - code: Int，邮件服务器响应代码，正常值是零。

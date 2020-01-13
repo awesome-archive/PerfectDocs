@@ -9,7 +9,7 @@ Mustache详细说明请见[Mustache标准（英文）](https://mustache.github.i
 ``` swift
 .Package(
 	url: "https://github.com/PerfectlySoft/Perfect-Mustache.git",
-	majorVersion: 2, minor: 0
+	majorVersion: 3
 	)
 ```
 
@@ -78,7 +78,7 @@ public func mustacheRequest(request req: HTTPRequest, response: HTTPResponse, ha
 }
 ```
 
-更详细的例子请参考[多文件上传示例](https://github.com/PerfectlySoft/PerfectExample-UploadEnumerator)便于更好理解本工具集。
+更详细的例子请参考[多文件上传示例](https://github.com/PerfectExamples/Perfect-UploadEnumerator)便于更好理解本工具集。
 
 ### 独立使用（非服务器）方法
 

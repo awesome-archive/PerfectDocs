@@ -19,7 +19,7 @@ SQLite连接库提供了对SQLite3的使用封装，允许您的Perfect应用程
 ``` swift
 .Package(
 	url: "https://github.com/PerfectlySoft/Perfect-SQLite.git",
-	majorVersion: 2, minor: 0
+	majorVersion: 3
 	)
 ```
 
@@ -28,7 +28,7 @@ SQLite连接库提供了对SQLite3的使用封装，允许您的Perfect应用程
 为了使用SQLite函数库，首先需要在您开发的源程序开始部分增加声明和导入操作：
 
 ``` swift
-import SQLite
+import PerfectSQLite
 ```
 
 ### 快速上手
@@ -123,7 +123,7 @@ do {
 
 	let demoStatement = "SELECT post_title, post_content FROM posts ORDER BY id DESC LIMIT :1"
 
-	try sqlite.forEachRow(statement: demoStatement, doBindings {
+	try sqlite.forEachRow(statement: demoStatement, doBindings: {
 		(statement: SQLiteStmt) -> () in
 
 		let bindValue = 5

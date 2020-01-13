@@ -27,7 +27,7 @@ Add the "Perfect-SQLite" project as a dependency in your Package.swift file:
 ``` swift
 .Package(
 	url: "https://github.com/PerfectlySoft/Perfect-SQLite.git",
-	majorVersion: 2, minor: 0
+	majorVersion: 3
 	)
 ```
 
@@ -36,7 +36,7 @@ Add the "Perfect-SQLite" project as a dependency in your Package.swift file:
 First and foremost, in any of the source files you intend to use with SQLite, import the module with:
 
 ``` swift
-import SQLite
+import PerfectSQLite
 ```
 
 ### Quick Start
@@ -132,7 +132,7 @@ do {
 
 	let demoStatement = "SELECT post_title, post_content FROM posts ORDER BY id DESC LIMIT :1"
 
-	try sqlite.forEachRow(statement: demoStatement, doBindings {
+	try sqlite.forEachRow(statement: demoStatement, doBindings: {
 
 		(statement: SQLiteStmt) -> () in
 

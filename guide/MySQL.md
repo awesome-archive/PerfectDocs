@@ -9,7 +9,7 @@ The MySQL connector provides a wrapper around MySQL, allowing interaction betwee
 Requires the use of Homebrew’s MySQL. 
 
 ```
-brew install mysql
+brew install mysql@5.7
 ```
 
 If you need Homebrew, you can install it with: 
@@ -26,6 +26,12 @@ Unfortunately, at this point in time you will need to edit the mysqlclient.pc fi
 
 Remove the occurrence of "-fno-omit-frame-pointer". This file is read-only by default so you will need to change its permissions first.
 
+⚠️**NOTE**⚠️ The last mysql homebrew version that Perfect currently supports is 5.7, so please try this command when some missing type issues were found on your build:
+
+```
+$ brew install mysql@5.7 && brew link mysql@5.7 --force
+```
+
 ### Linux 
 
 Ensure that you have installed libmysqlclient-dev for MySQL version 5.6 or greater:
@@ -41,7 +47,7 @@ Please note that Ubuntu 14 defaults to including a version of MySQL client which
 Add the "Perfect-MySQL" project as a dependency in your Package.swift file:
 
 ``` swift
-.Package(url:"https://github.com/PerfectlySoft/Perfect-MySQL.git", majorVersion: 2)
+.Package(url:"https://github.com/PerfectlySoft/Perfect-MySQL.git", majorVersion: 3)
 ```
 
 ### Import
@@ -49,7 +55,7 @@ Add the "Perfect-MySQL" project as a dependency in your Package.swift file:
 First and foremost, in any of the source files you intend to use with MySQL, import the required module with: 
 
 ``` swift
-import MySQL
+import PerfectMySQL
 ```
 
 ### Quick Start
@@ -139,8 +145,17 @@ Choosing the database is great, but it is much more helpful to run queries, such
 		        mysql.close() //This defer block makes sure we terminate the connection once finished, regardless of the result
 		    }
 		    
-		   //Run Query to Add Tables
-		   
+		  	//Run Query to Add Tables
+		  	let sql = """
+		  	CREATE TABLE IF NOT EXISTS ticket (
+    		id VARCHAR(64) PRIMARY KEY NOT NULL,
+			expiration INTEGER)
+    		"""
+			guard mysql.query(statement: sql) else {
+		        // verify the table was created successfully
+		        print(mysql.errorMessage())
+		        return
+		   }
 		   
 		}
 ```
@@ -181,7 +196,7 @@ Getting data from your schema is essential, and relatively easy to do. After run
 
         results.forEachRow { row in
             let optionName = getRowString(forRow: row[0]) //Store our Option Name, which would be the first item in the row, and therefore row[0].
-            let optionName = getRowString(forRow: row[1]) //Store our Option Value
+            let optionValue = getRowString(forRow: row[1]) //Store our Option Value
 
 
             ary.append("\(optionName)":optionValue]) //store our options
@@ -206,7 +221,7 @@ Creates an instance of the MySQL class that allows you to interact with MySQL da
 If your dataset contains non-ascii characters, please set this option for proper encoding:
 
 ``` swift
-setOption(MYSQL_SET_CHARSET_NAME, "utf8")
+setOption(.MYSQL_SET_CHARSET_NAME, "utf8")
 ```
 
 ### close
@@ -216,6 +231,17 @@ public func close()
 ```
 
 Closes a connection to MySQL. Most commonly used as a defer after guarding a connection, making sure that your session will close no matter what the outcome.
+
+### ping
+
+MySQL connection will go away when idle timeout. The `ping()` function
+can confirm the connectivity and also reconnect if need.
+
+``` swift
+guard mysql.ping() else {
+	// connection lost
+}
+```
 
 ### clientInfo
 

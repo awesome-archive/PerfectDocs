@@ -9,9 +9,9 @@
 - 如何为Swift项目编译、测试和管理依存关系
 - 如何将Perfect部署到其它环境中，比如Heroku、Amazon Web Services、Docker、Microsoft Azure、Google Cloud、IBM Bluemix CloudFoundry，以及IBM Bluemix Docker
 
-### Swift 3.0
+### Swift 4.0
 
-在您从[Swift.org（英文版）](https://swift.org/getting-started/)完成Swift 3.0 toolchain工具集安装之后，请打开一个命令行终端并输入命令
+在您从[Swift.org（英文版）](https://swift.org/getting-started/)完成Swift 4.0 toolchain工具集安装之后，请打开一个命令行终端并输入命令
 ```
 swift --version
 ```
@@ -19,16 +19,17 @@ swift --version
 如果能够看到类似于下面的消息就对了：
 
 ```
-Apple Swift version 3.0 (swiftlang-800.0.33.1 clang-800.0.31)
+Apple Swift version 4.0 (swiftlang-900.0.65 clang-900.0.37)
 Target: x86_64-apple-macosx10.9
 ```
-请注意您需要最新版本的Swift 3.0。如果低于3.0版本则Perfect是无法成功编译的。
+请注意您需要最新版本的Swift 4.0。如果低于4.0版本则Perfect是无法成功编译的。
 
 ### Ubuntu Linux
-Perfect软件框架可以在Ubuntu Linux 14.04 and 15.10环境下运行。Perfect依赖于若干软件接口库，比如OpenSSL、libssl-dev和uuid-dev。如果需要安装这些内容，请在终端控制台内输入：
+Perfect软件框架可以在Ubuntu Linux 16.04 环境下运行。Perfect依赖于若干软件接口库，比如OpenSSL、libssl-dev和uuid-dev。如果需要安装这些内容，请在终端控制台内输入：
 
 ```
 sudo apt-get install openssl libssl-dev uuid-dev
+mac os x命令更换为：brew install openssl
 ```
 
 ### Perfect项目快速上手
@@ -49,7 +50,7 @@ swift build
 您应该可以在终端控制台中看到类似下面的内容：
 
 ```
-Starting HTTP server on 0.0.0.0:8181 with document root ./webroot
+[INFO] Starting HTTP server localhost on 0.0.0.0:8181
 ```
 
 服务器现在已经运行并等待连接。从浏览器打开[http://localhost:8181/](http://127.0.0.1:8181/) 可以看到欢迎信息。在终端控制台中输入组合键“control-c”可以随时终止服务器运行。

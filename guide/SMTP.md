@@ -3,7 +3,7 @@
 
 This project provides an SMTP library.
 
-This package builds with Swift Package Manager and is part of the [Perfect](https://github.com/PerfectlySoft/Perfect) project. Ensure you have installed and activated the latest Swift 3.0 tool chain.
+This package builds with Swift Package Manager and is part of the [Perfect](https://github.com/PerfectlySoft/Perfect) project. Ensure you have installed and activated the latest Swift 4.0 tool chain.
 
 ## Linux Build Note
 
@@ -23,7 +23,7 @@ sudo apt-get install libssl-dev
 To use SMTP class, modify the Package.swift file and add following dependency:
 
 ``` swift
-.Package(url: "https://github.com/PerfectlySoft/Perfect-SMTP.git", majorVersion: 1, minor: 0)
+.Package(url: "https://github.com/PerfectlySoft/Perfect-SMTP.git", majorVersion: 3)
 ```
 
 Then import SMTP library into the Swift source code:
@@ -102,6 +102,7 @@ do {
 - attachments: [String], full path of attachments, i.e., ["/path/to/file1.txt", "/path/to/file2.gif" ...]
 - content: String, mail body in text, plain text or html
 - html: String, alias of `content` (shares the same variable as `content`)
+- text: String, set the content to plain text
 - send(completion: @escaping ((Int, String, String)->Void)), function of sending email with callback. The completion callback has three parameters; check Perfect-CURL `performFully()` for more information:
   - code: Int, mail server response code. Zero for OK.
   - header: String, mail server response header string.

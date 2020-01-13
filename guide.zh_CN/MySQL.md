@@ -9,7 +9,7 @@ MySQL连接库提供了对MySQL的使用封装，允许您的Perfect应用程序
 需要使用Homebrew安装MySQL。
 
 ```
-brew install mysql
+brew install mysql@5.7
 ```
 
 如果需要安装Homebrew，请用下面的命令行进行安装：
@@ -18,13 +18,13 @@ brew install mysql
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-同时还需要手工编辑以下路径的mysqlclient.pc文件
+⚠️**注意**⚠️ Perfect目前支持的最后一个mysql自制软件版本是5.7，所以当你的构建中发现一些遗漏类型问题时，请尝试使用此命令：
 
 ```
-/usr/local/lib/pkgconfig/mysqlclient.pc
+$ brew install mysql@5.7 && brew link mysql@5.7 --force
 ```
 
-请删除`-fno-omit-frame-pointer`内容。而且这个文件默认是只读的，因此需要首先改变只读状态为可读写才能进行编辑
+
 
 ### Linux
 
@@ -41,7 +41,7 @@ sudo apt-get install libmysqlclient-dev
 请在您的Package.swift文件中增加“Perfect-MySQL”用于说明调用库函数的依存关系：
 
 ``` swift
-.Package(url:"https://github.com/PerfectlySoft/Perfect-MySQL.git", majorVersion: 2)
+.Package(url:"https://github.com/PerfectlySoft/Perfect-MySQL.git", majorVersion: 3)
 ```
 
 ### 声明和导入
@@ -49,7 +49,7 @@ sudo apt-get install libmysqlclient-dev
 为了使用MySQL函数库，首先需要在您开发的源程序开始部分增加声明和导入操作：
 
 ``` swift
-import MySQL
+import PerfectMySQL
 ```
 
 ### 快速上手
@@ -130,6 +130,16 @@ func setupMySQLDB() {
 	}
 
 	// 执行查询或者创建表格
+  	let sql = """
+  	CREATE TABLE IF NOT EXISTS ticket (
+	id VARCHAR(64) PRIMARY KEY NOT NULL,
+	expiration INTEGER)
+	"""
+	guard mysql.query(statement: sql) else {
+        // 验证是否创建成功
+        print(mysql.errorMessage())
+        return
+   }
 }
 ```
 
@@ -167,7 +177,7 @@ func fetchData() {
 
 	results.forEachRow { row in
 		let optionName = getRowString(forRow: row[0]) //保存选项表的Name名称字段，应该是所在行的第一列，所以是row[0].
-		let optionName = getRowString(forRow: row[1]) //保存选项表Value字段
+		let optionValue = getRowString(forRow: row[1]) //保存选项表Value字段
 		ary.append("\(optionName)":optionValue]) //保存到字典内
 	}
 }
@@ -190,7 +200,7 @@ public init()
 如果您的数据库中包含非ascii码，比如中文，那么必须要在连接前设置下列选项：
 
 ``` swift
-setOption(MYSQL_SET_CHARSET_NAME, "utf8")
+setOption(.MYSQL_SET_CHARSET_NAME, "utf8")
 ```
 
 ### close
@@ -433,6 +443,16 @@ public func close()
 ```
 
 该函数释放MySQL语句结构指针所占用的资源。请务必在应用结束后调用该语句，否则会消耗MySQL C API函数库的宝贵内存。通常在defer块内滞后执行，如前例[快速上手](#快速上手)所示。
+
+### ping 检查连接
+
+MySQL 在长时间待机时有可能超时断线，用 `ping()` 函数可以检测连接并根据需要自动重连。 
+
+``` swift
+guard mysql.ping() else {
+	// 彻底断线了
+}
+```
 
 ### reset 复位重置
 
